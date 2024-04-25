@@ -40,40 +40,8 @@ class HomeViewController: UIViewController {
                             bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: PlacementCell.cellReuseIdentifier)
     }
-}
-
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.suggestions.count ?? 0
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: PlacementCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacementCell.cellReuseIdentifier,
-                                                                           for: indexPath) as? PlacementCell else { return UICollectionViewCell() }
-        
-        guard let suggestion = presenter?.suggestions[indexPath.item] else { return UICollectionViewCell() }
-        cell.configure(suggestion)
-        
-        return cell
-    }
-}
-
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let suggestion = presenter?.suggestions[indexPath.item] else { return }
-        productTapped(suggestion)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            return
-        }
-        
-        detailViewController.configure(suggestion) { [weak self] in
-            self?.navigationController?.pushViewController(detailViewController, animated: true)
-        }
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    private func checkVisibleCells() {
         for cell in collectionView.visibleCells {
             if let indexPath = collectionView.indexPath(for: cell) {
                 let cellFrame = collectionView.layoutAttributesForItem(at: indexPath)?.frame
@@ -97,6 +65,43 @@ extension HomeViewController: UICollectionViewDelegate {
                 }
             }
         }
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter?.suggestions.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: PlacementCell = collectionView.dequeueReusableCell(withReuseIdentifier: PlacementCell.cellReuseIdentifier,
+                                                                           for: indexPath) as? PlacementCell else { return UICollectionViewCell() }
+        
+        guard let suggestion = presenter?.suggestions[indexPath.item] else { return UICollectionViewCell() }
+        cell.configure(suggestion)
+        checkVisibleCells()
+        
+        return cell
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let suggestion = presenter?.suggestions[indexPath.item] else { return }
+        productTapped(suggestion)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            return
+        }
+        
+        detailViewController.configure(suggestion) { [weak self] in
+            self?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        checkVisibleCells()
     }
 }
 
