@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlacementCell" id="gTV-IL-0wX" customClass="PlacementCell" customModule="adcio_deco_app_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="140" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kkp-6G-vh5">
+                        <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="140" id="EbP-Ih-tXT"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="seller" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upi-WN-RYy">
+                        <rect key="frame" x="10" y="145" width="120" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="lGE-H1-m8u"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfW-ZK-Ghh">
+                        <rect key="frame" x="10" y="166" width="120" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="dES-yr-5BV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FVe-QL-o5D">
+                        <rect key="frame" x="10" y="187" width="94.333333333333329" height="17"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="395-AK-4c9">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,000₩" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t34-4D-B3i">
+                                <rect key="frame" x="38" y="0.0" width="56.333333333333343" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="z0f-Dv-kby"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="MfW-ZK-Ghh" firstAttribute="centerX" secondItem="Kkp-6G-vh5" secondAttribute="centerX" id="26Z-Se-Edu"/>
+                <constraint firstItem="Kkp-6G-vh5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="FDB-zN-azO"/>
+                <constraint firstItem="Kkp-6G-vh5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JRe-iC-1eI"/>
+                <constraint firstItem="FVe-QL-o5D" firstAttribute="top" secondItem="MfW-ZK-Ghh" secondAttribute="bottom" constant="4" id="OpD-vf-RVd"/>
+                <constraint firstAttribute="trailing" secondItem="Kkp-6G-vh5" secondAttribute="trailing" id="PfF-M8-wNJ"/>
+                <constraint firstItem="upi-WN-RYy" firstAttribute="centerX" secondItem="Kkp-6G-vh5" secondAttribute="centerX" id="WKc-NU-pCA"/>
+                <constraint firstItem="FVe-QL-o5D" firstAttribute="leading" secondItem="MfW-ZK-Ghh" secondAttribute="leading" id="dNN-Oo-s69"/>
+                <constraint firstItem="upi-WN-RYy" firstAttribute="top" secondItem="Kkp-6G-vh5" secondAttribute="bottom" constant="5" id="mfX-L9-1Ay"/>
+                <constraint firstItem="MfW-ZK-Ghh" firstAttribute="top" secondItem="upi-WN-RYy" secondAttribute="bottom" constant="4" id="vqj-4D-ZZ7"/>
+            </constraints>
+            <size key="customSize" width="168" height="271"/>
+            <connections>
+                <outlet property="nameLabel" destination="MfW-ZK-Ghh" id="aGs-g2-giU"/>
+                <outlet property="priceLabel" destination="t34-4D-B3i" id="n4X-q3-4ng"/>
+                <outlet property="sellerLabel" destination="upi-WN-RYy" id="4DJ-8c-9jm"/>
+                <outlet property="thumbnailImage" destination="Kkp-6G-vh5" id="2PJ-jd-psh"/>
+            </connections>
+            <point key="canvasLocation" x="225.95419847328245" y="92.605633802816911"/>
+        </collectionViewCell>
+    </objects>
+</document>
