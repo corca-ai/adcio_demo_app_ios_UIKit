@@ -26,8 +26,6 @@ class PlacementCell: UICollectionViewCell {
         priceLabel.text = "\(suggestion.product.price)₩"
         sellerLabel.text = suggestion.product.seller
         
-        thumbnailImage.backgroundColor = .lightGray
-        
         guard let url = URL(string: suggestion.product.image) else { return }
         
         ImageLoader.loadImage(from: url) { [weak self] image in

@@ -18,7 +18,7 @@ protocol HomePresenterView: AnyObject {
 }
 
 final class HomePresenter {
-    private let clientID: String = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"
+    private let clientID: String = "f8f2e298-c168-4412-b82d-98fc5b4a114a"
     private var analyticsManager: AnalyticsViewManageable
     private var placementManager: PlacementManageable
     private var impressable: Bool = false
@@ -79,9 +79,9 @@ final class HomePresenter {
     func createSuggestion() {
         placementManager.adcioCreateSuggestion(
             clientID: clientID,
-            excludingProductIDs: ["1321"],
-            categoryID: "2017",
-            placementID: "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4",
+            excludingProductIDs: ["1001"],
+            categoryID: "1",
+            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
             customerID: "corca0302",
             placementPositionX: 80,
             placementPositionY: 80,

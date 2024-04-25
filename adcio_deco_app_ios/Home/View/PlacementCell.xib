@@ -20,6 +20,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kkp-6G-vh5">
                         <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="140" id="0VA-3m-GU8"/>
                             <constraint firstAttribute="height" constant="140" id="EbP-Ih-tXT"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
