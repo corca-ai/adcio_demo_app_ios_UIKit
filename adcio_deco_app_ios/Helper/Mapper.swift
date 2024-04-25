@@ -10,7 +10,7 @@ import AdcioPlacement
 import AdcioAnalytics
 
 struct SuggestionMapper {
-    static func map(from: [AdvertisementProduct]) -> [SuggestionEntity] {
+    static func map(from: [AdcioSuggestion]) -> [SuggestionEntity] {
         let products = from.map { $0.product }
         let options = from.map { $0.logOptions }
         
