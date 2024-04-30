@@ -37,6 +37,8 @@ final class HomePresenter {
     }
     
     func productTapped(_ suggestion: SuggestionEntity) {
+        guard suggestion.product.isAd else { return }
+        
         let option = LogOptionMapper.map(from: suggestion.option)
         
         analyticsManager.productTapped(option: option) { result in
