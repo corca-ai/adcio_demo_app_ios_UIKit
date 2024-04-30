@@ -11,7 +11,6 @@ import AdcioAnalytics
 import AdcioPlacement
 
 protocol HomePresenterView: AnyObject {
-    func viewChanged(with path: String)
     func productTapped(_ suggestion: SuggestionEntity)
     func productImpressed(with option: LogOptionEntity)
     func createSuggestion()
@@ -35,17 +34,6 @@ final class HomePresenter {
         self.analyticsManager = AnalyticsManager(clientID: clientID)
         self.placementManager = PlacementManager()
         self.view = view
-    }
-    
-    func viewChanged(with path: String) {
-        analyticsManager.viewChanged(path: path) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("\(path) viewChanged \(isSuccess) ✅")
-            case .failure(let error):
-                print("\(path) viewChanged : \(error) ❌")
-            }
-        }
     }
     
     func productTapped(_ suggestion: SuggestionEntity) {
@@ -83,8 +71,6 @@ final class HomePresenter {
             categoryID: "1",
             placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
             customerID: "corca0302",
-            placementPositionX: 80,
-            placementPositionY: 80,
             fromAgent: false,
             birthYear: 2000,
             gender: .male,

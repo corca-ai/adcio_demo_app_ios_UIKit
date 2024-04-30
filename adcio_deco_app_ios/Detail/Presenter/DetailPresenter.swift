@@ -48,10 +48,12 @@ final class DetailPresenter {
     }
     
     func viewChanged(with path: String) {
-        analyticsManager.viewChanged(path: path, 
-                                     customerID: "corca0302",
+        analyticsManager.viewChanged(customerID: nil,
                                      productIDOnStore: suggestion.product.id,
-                                     title: suggestion.product.name) { result in
+                                     title: suggestion.product.name,
+                                     requestID: suggestion.option.requestId,
+                                     adsetID: suggestion.option.adsetId,
+                                     categoryIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("\(path) viewChanged \(isSuccess) ✅")

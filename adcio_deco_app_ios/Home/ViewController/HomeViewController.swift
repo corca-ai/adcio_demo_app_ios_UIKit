@@ -29,12 +29,7 @@ class HomeViewController: UIViewController {
         
         presenter?.createSuggestion()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewChanged(with: "Home")
-    }
-    
+        
     private func registerXib() {
         let nibName = UINib(nibName: PlacementCell.cellName,
                             bundle: nil)
@@ -112,10 +107,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeViewController: HomePresenterView {
-    func viewChanged(with path: String) {
-        presenter?.viewChanged(with: path)
-    }
-    
     func productImpressed(with option: LogOptionEntity) {
         presenter?.productImpressed(with: option)
     }
