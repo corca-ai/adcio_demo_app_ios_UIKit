@@ -1,0 +1,15 @@
+{
+  "originHash" : "705ff44e288ea71e2504b659cf51bafafd0a971a0811c5f3d37682a712f89cea",
+  "pins" : [
+    {
+      "identity" : "adcio-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/corca-ai/adcio-ios-sdk",
+      "state" : {
+        "branch" : "demo",
+        "revision" : "83a8e37db4016f1c05f3914e18db89e3238240af"
+      }
+    }
+  ],
+  "version" : 3
+}

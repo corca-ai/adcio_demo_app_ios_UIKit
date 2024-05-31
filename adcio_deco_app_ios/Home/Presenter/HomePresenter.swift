@@ -41,7 +41,7 @@ final class HomePresenter {
         
         let option = LogOptionMapper.map(from: suggestion.option)
         
-        analyticsManager.productTapped(option: option) { result in
+        analyticsManager.productTapped(option: option, customerID: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("productTapped ✅ \(isSuccess) ")
@@ -56,7 +56,7 @@ final class HomePresenter {
         
         let optionEntity = LogOptionMapper.map(from: option)
         
-        analyticsManager.productImpressed(option: optionEntity) { result in
+        analyticsManager.productImpressed(option: optionEntity, customerID: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("productImpressed ✅ \(isSuccess) ")

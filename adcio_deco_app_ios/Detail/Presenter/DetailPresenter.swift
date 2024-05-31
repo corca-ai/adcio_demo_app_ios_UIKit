@@ -66,6 +66,7 @@ final class DetailPresenter {
     
     func addToCart() {
         analyticsManager.addToCart(cartID: "cartID",
+                                   customerID: nil,
                                    productIDOnStore: suggestion.product.id) { result in
             switch result {
             case .success(let isSuccess):
@@ -78,6 +79,7 @@ final class DetailPresenter {
     
     func productPurchased() {
         analyticsManager.productPurchased(orderID: "orderID",
+                                          customerID: nil,
                                           productIDOnStore: suggestion.product.id,
                                           amount: suggestion.product.price) { result in
             switch result {
