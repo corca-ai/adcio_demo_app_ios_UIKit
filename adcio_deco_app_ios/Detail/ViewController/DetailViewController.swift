@@ -40,7 +40,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewChanged(with: "Deatil")
+        onView(with: "Deatil")
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
@@ -50,30 +50,30 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func purchaseButtonTapped(_ sender: UIButton) {
-        productPurchased()
+        onPurchase()
     }
     
     @IBAction func addCartButtonTapped(_ sender: UIBarButtonItem) {
-        addToCart()
+        onAddToCart()
     }
 }
 
 extension DetailViewController: DetailPresenterView {
-    func viewChanged(with path: String) {
+    func onView(with path: String) {
         DispatchQueue.main.async {
-            self.presenter?.viewChanged(with: path)
+            self.presenter?.onView(with: path)
         }
     }
     
-    func addToCart() {
+    func onAddToCart() {
         DispatchQueue.main.async {
-            self.presenter?.addToCart()
+            self.presenter?.onAddToCart()
         }
     }
     
-    func productPurchased() {
+    func onPurchase() {
         DispatchQueue.main.async {
-            self.presenter?.productPurchased()
+            self.presenter?.onPurchase()
         }
     }
 }

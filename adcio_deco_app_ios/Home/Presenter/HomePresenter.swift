@@ -11,9 +11,9 @@ import AdcioAnalytics
 import AdcioPlacement
 
 protocol HomePresenterView: AnyObject {
-    func productTapped(_ suggestion: SuggestionEntity)
-    func productImpressed(with option: LogOptionEntity)
-    func createSuggestion()
+    func onClick(_ suggestion: SuggestionEntity)
+    func onImpression(with option: LogOptionEntity)
+    func createAdvertisementProducts()
 }
 
 final class HomePresenter {
@@ -36,12 +36,12 @@ final class HomePresenter {
         self.view = view
     }
     
-    func productTapped(_ suggestion: SuggestionEntity) {
+    func onClick(_ suggestion: SuggestionEntity) {
         guard suggestion.product.isAd else { return }
         
         let option = LogOptionMapper.map(from: suggestion.option)
         
-        analyticsManager.productTapped(option: option, customerID: nil) { result in
+        analyticsManager.onClick(option: option, customerID: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("productTapped ✅ \(isSuccess) ")
@@ -51,12 +51,14 @@ final class HomePresenter {
         }
     }
     
-    func productImpressed(with option: LogOptionEntity) {
+    func onImpression(with option: LogOptionEntity) {
         guard impressable else { return }
         
         let optionEntity = LogOptionMapper.map(from: option)
         
-        analyticsManager.productImpressed(option: optionEntity, customerID: nil) { result in
+        analyticsManager.onImpression(option: optionEntity,
+                                      customerID: nil,
+                                      productIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("productImpressed ✅ \(isSuccess) ")
@@ -66,8 +68,8 @@ final class HomePresenter {
         }
     }
     
-    func createSuggestion() {
-        placementManager.adcioCreateSuggestion(
+    func createAdvertisementProducts() {
+        placementManager.createAdvertisementProducts(
             clientID: clientID,
             excludingProductIDs: ["1001"],
             categoryID: "1",
@@ -75,8 +77,7 @@ final class HomePresenter {
             customerID: "corca0302",
             fromAgent: false,
             birthYear: 2000,
-            gender: .male,
-            area: "Vietnam") { [weak self] result in
+            gender: .male) { [weak self] result in
                 switch result {
                 case .success(let suggestions):
                     self?.suggestions = SuggestionMapper.map(from: suggestions)

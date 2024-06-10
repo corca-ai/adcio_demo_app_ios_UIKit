@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
             }
         }
         
-        presenter?.createSuggestion()
+        presenter?.createAdvertisementProducts()
     }
         
     private func registerXib() {
@@ -55,7 +55,7 @@ class HomeViewController: UIViewController {
                     let cellArea = cellFrame.width * cellFrame.height
                     
                     if visibleArea / cellArea >= 0.5 {
-                        productImpressed(with: suggestion.option)
+                        onImpression(with: suggestion.option)
                     }
                 }
             }
@@ -83,7 +83,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let suggestion = presenter?.suggestions[indexPath.item] else { return }
-        productTapped(suggestion)
+        onClick(suggestion)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let detailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
@@ -107,15 +107,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeViewController: HomePresenterView {
-    func productImpressed(with option: LogOptionEntity) {
-        presenter?.productImpressed(with: option)
+    func onImpression(with option: LogOptionEntity) {
+        presenter?.onImpression(with: option)
     }
     
-    func productTapped(_ suggestion: SuggestionEntity) {
-        presenter?.productTapped(suggestion)
+    func onClick(_ suggestion: SuggestionEntity) {
+        presenter?.onClick(suggestion)
     }
     
-    func createSuggestion() {
-        presenter?.createSuggestion()
+    func createAdvertisementProducts() {
+        presenter?.createAdvertisementProducts()
     }
 }

@@ -9,9 +9,9 @@ import Foundation
 import AdcioAnalytics
 
 protocol DetailPresenterView: AnyObject {
-    func viewChanged(with path: String)
-    func addToCart()
-    func productPurchased()
+    func onView(with path: String)
+    func onAddToCart()
+    func onPurchase()
 }
 
 final class DetailPresenter {
@@ -47,27 +47,31 @@ final class DetailPresenter {
         return suggestion.product.id
     }
     
-    func viewChanged(with path: String) {
-        analyticsManager.viewChanged(customerID: nil,
-                                     productIDOnStore: suggestion.product.id,
-                                     title: suggestion.product.name,
-                                     requestID: suggestion.option.requestId,
-                                     adsetID: suggestion.option.adsetId,
-                                     categoryIDOnStore: nil) { result in
+    func onView(with path: String) {
+        analyticsManager.onView(customerID: nil,
+                                productIDOnStore: suggestion.product.id,
+                                title: suggestion.product.name,
+                                requestID: suggestion.option.requestId,
+                                adsetID: suggestion.option.adsetId,
+                                categoryIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("\(path) viewChanged \(isSuccess) ✅")
-            
+                
             case .failure(let error):
                 print("\(path) viewChanged : \(error) ❌")
             }
         }
     }
     
-    func addToCart() {
-        analyticsManager.addToCart(cartID: "cartID",
-                                   customerID: nil,
-                                   productIDOnStore: suggestion.product.id) { result in
+    func onAddToCart() {
+        analyticsManager.onAddToCart(cartID: nil,
+                                     customerID: nil,
+                                     productIDOnStore: nil,
+                                     reqeustID: nil,
+                                     adsetID: nil,
+                                     categoryIdOnStore: nil,
+                                     quantity: nil) { result in
             switch result {
             case .success(let isSuccess):
                 print("addToCart \(isSuccess) ✅")
@@ -77,11 +81,15 @@ final class DetailPresenter {
         }
     }
     
-    func productPurchased() {
-        analyticsManager.productPurchased(orderID: "orderID",
-                                          customerID: nil,
-                                          productIDOnStore: suggestion.product.id,
-                                          amount: suggestion.product.price) { result in
+    func onPurchase() {
+        analyticsManager.onPurchase(orderID: "orderID",
+                                    customerID: nil,
+                                    requestID: suggestion.option.requestId,
+                                    adsetID: suggestion.option.adsetId,
+                                    categoryIDOnStore: nil,
+                                    quantity: nil,
+                                    productIDOnStore: suggestion.product.id,
+                                    amount: suggestion.product.price) { result in
             switch result {
             case .success(let isSuccess):
                 print("productPurchased \(isSuccess) ✅")
