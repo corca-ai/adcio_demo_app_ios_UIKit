@@ -56,10 +56,10 @@ final class DetailPresenter {
                                 categoryIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
-                print("\(path) viewChanged \(isSuccess) ✅")
+                print("\(path) onView \(isSuccess) ✅")
                 
             case .failure(let error):
-                print("\(path) viewChanged : \(error) ❌")
+                print("\(path) onView : \(error) ❌")
             }
         }
     }
@@ -74,9 +74,9 @@ final class DetailPresenter {
                                      quantity: nil) { result in
             switch result {
             case .success(let isSuccess):
-                print("addToCart \(isSuccess) ✅")
+                print("onAddToCart \(isSuccess) ✅")
             case .failure(let error):
-                print("addToCart : \(error) ❌")
+                print("onAddToCart : \(error) ❌")
             }
         }
     }
@@ -92,9 +92,9 @@ final class DetailPresenter {
                                     amount: suggestion.product.price) { result in
             switch result {
             case .success(let isSuccess):
-                print("productPurchased \(isSuccess) ✅")
+                print("onPurchase \(isSuccess) ✅")
             case .failure(let error):
-                print("productPurchased : \(error) ❌")
+                print("onPurchase : \(error) ❌")
             }
         }
     }

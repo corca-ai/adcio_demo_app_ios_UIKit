@@ -44,9 +44,9 @@ final class HomePresenter {
         analyticsManager.onClick(option: option, customerID: nil) { result in
             switch result {
             case .success(let isSuccess):
-                print("productTapped ✅ \(isSuccess) ")
+                print("onClick ✅ \(isSuccess) ")
             case .failure(let error):
-                print("productTapped ❌ : \(error) ")
+                print("onClick ❌ : \(error) ")
             }
         }
     }
@@ -61,9 +61,9 @@ final class HomePresenter {
                                       productIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
-                print("productImpressed ✅ \(isSuccess) ")
+                print("onImpression ✅ \(isSuccess) ")
             case .failure(let error):
-                print("productImpressed ❌ : \(error) ")
+                print("onImpression ❌ : \(error) ")
             }
         }
     }
@@ -82,10 +82,10 @@ final class HomePresenter {
                 case .success(let suggestions):
                     self?.suggestions = SuggestionMapper.map(from: suggestions)
                     self?.impressable = true
-                    print("createSuggestion ✅")
+                    print("createAdvertisementProducts ✅")
                     
                 case .failure(let error):
-                    print("createSuggestion ❌ : \(error)")
+                    print("createAdvertisementProducts ❌ : \(error)")
                 }
             }
     }
