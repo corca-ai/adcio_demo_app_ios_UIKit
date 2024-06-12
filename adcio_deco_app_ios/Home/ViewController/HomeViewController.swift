@@ -48,6 +48,7 @@ class HomeViewController: UIViewController {
         collectionView.register(nibName, forCellWithReuseIdentifier: PlacementCell.cellReuseIdentifier)
     }
     
+    //MARK: - Code that detects that a product as a suggestion is on the screen 50% of the time for more than 1 second
     private func checkVisibleCells() {
         for cell in collectionView.visibleCells {
             if let indexPath = collectionView.indexPath(for: cell) {
