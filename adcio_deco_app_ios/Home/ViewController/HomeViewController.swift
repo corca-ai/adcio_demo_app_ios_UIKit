@@ -28,8 +28,6 @@ class HomeViewController: UIViewController {
                 self?.collectionView.reloadData()
             }
         }
-        
-        presenter?.createAdvertisementProducts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
