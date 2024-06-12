@@ -77,7 +77,10 @@ final class HomePresenter {
             customerID: "corca0302",
             fromAgent: false,
             birthYear: 2000,
-            gender: .male) { [weak self] result in
+            gender: .male, 
+            filters:
+                Filter(provinceID: ProvinceID(equalTo: "1"))
+            ) { [weak self] result in
                 switch result {
                 case .success(let suggestions):
                     self?.suggestions = SuggestionMapper.map(from: suggestions)
@@ -85,6 +88,75 @@ final class HomePresenter {
                     print("createAdvertisementProducts ✅")
                     
                 case .failure(let error):
+                    print("createAdvertisementProducts ❌ : \(error)")
+                }
+            }
+    }
+    
+    func createRecommendationProducts() {
+        placementManager.createRecommendationProducts(
+            clientID: clientID,
+            excludingProductIDs: ["1001"],
+            categoryID: "1",
+            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
+            customerID: "corca0302",
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male,
+            filters:
+                Filter(provinceID: ProvinceID(equalTo: "1"))
+            ) { [weak self] result in
+                switch result {
+                case .success(let suggestions):
+                    self?.suggestions = SuggestionMapper.map(from: suggestions)
+                    self?.impressable = true
+                    print("createAdvertisementProducts ✅")
+                    
+                case .failure(let error):
+                    print("createAdvertisementProducts ❌ : \(error)")
+                }
+            }
+    }
+    
+    func createAdvertisementBanners() {
+        placementManager.createAdvertisementBanners(
+            clientID: clientID,
+            excludingProductIDs: ["1031"],
+            categoryID: "1",
+            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
+            customerID: "corca0302",
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male) { [weak self] result in
+                switch result {
+                case .success(let suggestions):
+                    // success do something
+                    print("createAdvertisementProducts ✅")
+                    
+                case .failure(let error):
+                    // failure do something
+                    print("createAdvertisementProducts ❌ : \(error)")
+                }
+            }
+    }
+    
+    func createRecommendationBanners() {
+        placementManager.createRecommendationBanners(
+            clientID: clientID,
+            excludingProductIDs: ["1031"],
+            categoryID: "1",
+            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
+            customerID: "corca0302",
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male) { [weak self] result in
+                switch result {
+                case .success(let suggestions):
+                    // success do something
+                    print("createAdvertisementProducts ✅")
+                    
+                case .failure(let error):
+                    // failure do something
                     print("createAdvertisementProducts ❌ : \(error)")
                 }
             }

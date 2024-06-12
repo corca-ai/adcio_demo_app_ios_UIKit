@@ -11,6 +11,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var presenter: HomePresenter?
+    private var visibleCellsWorkItems: [IndexPath: DispatchWorkItem] = [:]
+    private let impressionThreshold: TimeInterval = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,17 @@ class HomeViewController: UIViewController {
         
         presenter?.createAdvertisementProducts()
     }
-        
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.createAdvertisementProducts()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        cleanupWorkItems()
+    }
+    
     private func registerXib() {
         let nibName = UINib(nibName: PlacementCell.cellName,
                             bundle: nil)
@@ -55,11 +67,41 @@ class HomeViewController: UIViewController {
                     let cellArea = cellFrame.width * cellFrame.height
                     
                     if visibleArea / cellArea >= 0.5 {
-                        onImpression(with: suggestion.option)
+                        scheduleImpression(for: indexPath, logOption: suggestion.option)
+                    } else {
+                        cancelScheduledImpression(for: indexPath)
                     }
+                } else {
+                    cancelScheduledImpression(for: indexPath)
                 }
             }
         }
+    }
+    
+    private func scheduleImpression(for indexPath: IndexPath, logOption: LogOptionEntity) {
+        // If there's already a scheduled work item, do nothing
+        if visibleCellsWorkItems[indexPath] != nil { return }
+        
+        let workItem = DispatchWorkItem { [weak self] in
+            self?.onImpression(with: logOption)
+            self?.visibleCellsWorkItems[indexPath] = nil
+        }
+        visibleCellsWorkItems[indexPath] = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + impressionThreshold, execute: workItem)
+    }
+    
+    private func cancelScheduledImpression(for indexPath: IndexPath) {
+        if let workItem = visibleCellsWorkItems[indexPath] {
+            workItem.cancel()
+            visibleCellsWorkItems[indexPath] = nil
+        }
+    }
+    
+    private func cleanupWorkItems() {
+        for workItem in visibleCellsWorkItems.values {
+            workItem.cancel()
+        }
+        visibleCellsWorkItems.removeAll()
     }
 }
 
