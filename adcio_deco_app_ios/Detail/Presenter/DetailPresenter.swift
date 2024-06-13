@@ -67,9 +67,9 @@ final class DetailPresenter {
     func onAddToCart() {
         analyticsManager.onAddToCart(cartID: nil,
                                      customerID: nil,
-                                     productIDOnStore: nil,
-                                     reqeustID: nil,
-                                     adsetID: nil,
+                                     productIDOnStore: suggestion.product.id,
+                                     reqeustID: suggestion.option.requestId,
+                                     adsetID: suggestion.option.adsetId,
                                      categoryIdOnStore: nil,
                                      quantity: nil) { result in
             switch result {
