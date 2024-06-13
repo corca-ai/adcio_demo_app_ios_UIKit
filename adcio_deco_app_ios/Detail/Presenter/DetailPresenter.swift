@@ -50,7 +50,6 @@ final class DetailPresenter {
     func onView(with path: String) {
         analyticsManager.onView(customerID: nil,
                                 productIDOnStore: suggestion.product.id,
-                                title: suggestion.product.name,
                                 requestID: suggestion.option.requestId,
                                 adsetID: suggestion.option.adsetId,
                                 categoryIDOnStore: nil) { result in
