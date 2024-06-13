@@ -82,7 +82,8 @@ final class HomePresenter {
             gender: .male,
             filters: [
                 "price_excluding_tax": Filter(not: 53636),
-                "product_code": Filter(contains: "KY")
+                "product_code": Filter(contains: "KY"),
+                "province_id": Filter(equalTo: 1)
             ]
         ) { [weak self] result in
             switch result {
@@ -109,7 +110,8 @@ final class HomePresenter {
             gender: .male,
             filters: [
                 "price_excluding_tax": Filter(not: 53636),
-                "product_code": Filter(contains: "KY")
+                "product_code": Filter(contains: "KY"),
+                "province_id": Filter(equalTo: 1)
             ]
         ) { [weak self] result in
             switch result {
