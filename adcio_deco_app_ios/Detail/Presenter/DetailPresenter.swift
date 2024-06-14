@@ -50,8 +50,8 @@ final class DetailPresenter {
     func onView(with path: String) {
         analyticsManager.onView(customerID: nil,
                                 productIDOnStore: suggestion.product.id,
-                                requestID: suggestion.option.requestId,
-                                adsetID: suggestion.option.adsetId,
+                                requestID: suggestion.option.requestID,
+                                adsetID: suggestion.option.adsetID,
                                 categoryIDOnStore: nil) { result in
             switch result {
             case .success(let isSuccess):
@@ -67,8 +67,8 @@ final class DetailPresenter {
         analyticsManager.onAddToCart(cartID: nil,
                                      customerID: nil,
                                      productIDOnStore: suggestion.product.id,
-                                     reqeustID: suggestion.option.requestId,
-                                     adsetID: suggestion.option.adsetId,
+                                     reqeustID: suggestion.option.requestID,
+                                     adsetID: suggestion.option.adsetID,
                                      categoryIdOnStore: nil,
                                      quantity: nil) { result in
             switch result {
@@ -83,8 +83,8 @@ final class DetailPresenter {
     func onPurchase() {
         analyticsManager.onPurchase(orderID: "orderID",
                                     customerID: nil,
-                                    requestID: suggestion.option.requestId,
-                                    adsetID: suggestion.option.adsetId,
+                                    requestID: suggestion.option.requestID,
+                                    adsetID: suggestion.option.adsetID,
                                     categoryIDOnStore: nil,
                                     quantity: nil,
                                     productIDOnStore: suggestion.product.id,

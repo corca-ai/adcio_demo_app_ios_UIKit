@@ -8,6 +8,6 @@
 import Foundation
 
 struct LogOptionEntity: Hashable {
-    let requestId: String
-    let adsetId: String
+    let requestID: String
+    let adsetID: String
 }

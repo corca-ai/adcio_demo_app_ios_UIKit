@@ -22,8 +22,8 @@ struct SuggestionMapper {
                                               seller: product.sellerId,
                                               isAd: true)
             
-            let optionEntity = LogOptionEntity(requestId: option.requestId,
-                                               adsetId: option.adsetId)
+            let optionEntity = LogOptionEntity(requestID: option.requestId,
+                                               adsetID: option.adsetId)
             
             return SuggestionEntity(product: productEntity,
                              option: optionEntity)
@@ -35,8 +35,8 @@ struct SuggestionMapper {
 
 struct LogOptionMapper {
     static func map(from: LogOptionEntity) -> AdcioLogOption {
-        let option = AdcioLogOption(requestID: from.requestId,
-                                    adsetID: from.adsetId)
+        let option = AdcioLogOption(requestID: from.requestID,
+                                    adsetID: from.adsetID)
         return option
     }
 }

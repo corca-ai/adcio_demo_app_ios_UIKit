@@ -20,7 +20,8 @@ final class HomePresenter {
     private let clientID: String = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"
     private var analyticsManager: AnalyticsViewManageable
     private var placementManager: PlacementManageable
-    private var impressable: Bool = false
+    //Impression should only run once after the screen is launched.  This logic prevents Impression from being called multiple times.
+    private var impressionManager: ImpressionManageable
     private(set) var suggestions: [SuggestionEntity] = [] {
         didSet {
             self.reloadCollectionView?()
@@ -33,6 +34,7 @@ final class HomePresenter {
     init(view: HomePresenterView) {
         self.analyticsManager = AnalyticsManager(clientID: clientID)
         self.placementManager = PlacementManager()
+        self.impressionManager = ImpressionManager()
         self.view = view
     }
     
@@ -41,7 +43,7 @@ final class HomePresenter {
         
         let option = LogOptionMapper.map(from: suggestion.option)
         
-        analyticsManager.onClick(option: option, 
+        analyticsManager.onClick(option: option,
                                  customerID: nil,
                                  productIDOnStore: suggestion.product.id) { result in
             switch result {
@@ -54,7 +56,11 @@ final class HomePresenter {
     }
     
     func onImpression(with option: LogOptionEntity) {
-        guard impressable else { return }
+        guard !impressable(with: option.adsetID) else {
+            return
+        }
+        
+        append(with: option.adsetID)
         
         let optionEntity = LogOptionMapper.map(from: option)
         
@@ -89,7 +95,6 @@ final class HomePresenter {
             switch result {
             case .success(let suggestions):
                 self?.suggestions = SuggestionMapper.map(from: suggestions)
-                self?.impressable = true
                 print("createAdvertisementProducts ✅")
                 
             case .failure(let error):
@@ -117,7 +122,6 @@ final class HomePresenter {
             switch result {
             case .success(let suggestions):
                 self?.suggestions = SuggestionMapper.map(from: suggestions)
-                self?.impressable = true
                 print("createAdvertisementProducts ✅")
                 
             case .failure(let error):
@@ -168,5 +172,13 @@ final class HomePresenter {
                     print("createAdvertisementProducts ❌ : \(error)")
                 }
             }
+    }
+    
+    private func impressable(with adSetID: AdSetID) -> Bool {
+        return impressionManager.impressable(with: adSetID)
+    }
+    
+    private func append(with adSetID: AdSetID) {
+        impressionManager.append(with: adSetID)
     }
 }

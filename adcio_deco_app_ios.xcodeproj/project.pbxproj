@@ -10,6 +10,7 @@
 		6921F7112BD8A44200ED649E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6921F7102BD8A44200ED649E /* DetailViewController.swift */; };
 		6921F7132BD8A45D00ED649E /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6921F7122BD8A45D00ED649E /* DetailPresenter.swift */; };
 		6998BEFD2BD8F64E0066ABD7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998BEFC2BD8F64E0066ABD7 /* ImageLoader.swift */; };
+		69C8CF112C1C0C3200E4A899 /* ImpressionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8CF102C1C0C3200E4A899 /* ImpressionManager.swift */; };
 		9BD26EA62BD7F96700508AA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD26EA52BD7F96700508AA6 /* AppDelegate.swift */; };
 		9BD26EA82BD7F96700508AA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD26EA72BD7F96700508AA6 /* SceneDelegate.swift */; };
 		9BD26EAD2BD7F96700508AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD26EAB2BD7F96700508AA6 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		6921F7102BD8A44200ED649E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		6921F7122BD8A45D00ED649E /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		6998BEFC2BD8F64E0066ABD7 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		69C8CF102C1C0C3200E4A899 /* ImpressionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressionManager.swift; sourceTree = "<group>"; };
 		9BD26EA22BD7F96700508AA6 /* adcio_deco_app_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = adcio_deco_app_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD26EA52BD7F96700508AA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BD26EA72BD7F96700508AA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				9BD26EDD2BD7FEF300508AA6 /* Mapper.swift */,
 				6998BEFC2BD8F64E0066ABD7 /* ImageLoader.swift */,
+				69C8CF102C1C0C3200E4A899 /* ImpressionManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				6921F7132BD8A45D00ED649E /* DetailPresenter.swift in Sources */,
 				9BD26EA82BD7F96700508AA6 /* SceneDelegate.swift in Sources */,
 				9BD26EED2BD810E200508AA6 /* HomePresenter.swift in Sources */,
+				69C8CF112C1C0C3200E4A899 /* ImpressionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
