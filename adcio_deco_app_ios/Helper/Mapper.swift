@@ -10,9 +10,10 @@ import AdcioPlacement
 import AdcioAnalytics
 
 struct SuggestionMapper {
-    static func map(from: [AdcioSuggestion]) -> [SuggestionEntity] {
-        let products = from.map { $0.product }
-        let options = from.map { $0.logOptions }
+    static func map(from: AdcioSuggestionRawData) -> [SuggestionEntity] {
+        let isBaseline = from.metadata?.isBaseline ?? false
+        let products = from.suggestions.map { $0.product }
+        let options = from.suggestions.map { $0.logOptions }
         
         let suggestions = zip(products, options).map { product, option in
             let productEntity = ProductEntity(id: product.id,
@@ -25,8 +26,7 @@ struct SuggestionMapper {
             let optionEntity = LogOptionEntity(requestID: option.requestId,
                                                adsetID: option.adsetId)
             
-            return SuggestionEntity(product: productEntity,
-                             option: optionEntity)
+            return SuggestionEntity(product: productEntity, option: optionEntity, isBaseline: isBaseline)
         }
         
         return suggestions

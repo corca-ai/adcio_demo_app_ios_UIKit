@@ -17,7 +17,7 @@ protocol HomePresenterView: AnyObject {
 }
 
 final class HomePresenter {
-    private let clientID: String = "76dc12fa-5a73-4c90-bea5-d6578f9bc606"
+    private let clientID: String = "542b343f-f103-44ff-93a2-174722e0b5f7"
     private var analyticsManager: AnalyticsViewManageable
     private var placementManager: PlacementManageable
     //Impression should only run once after the screen is launched.  This logic prevents Impression from being called multiple times.
@@ -106,26 +106,27 @@ final class HomePresenter {
     func createRecommendationProducts() {
         placementManager.createRecommendationProducts(
             clientID: clientID,
-            excludingProductIDs: ["1001"],
-            categoryID: "1",
+            excludingProductIDs: nil,
+            categoryID: nil,
             placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
             customerID: "corca0302",
             fromAgent: false,
             birthYear: 2000,
             gender: .male,
-            filters: [
-                "price_excluding_tax": Filter(not: 53636),
-                "product_code": Filter(contains: "KY"),
-                "province_id": Filter(equalTo: 1)
-            ]
+            filters: nil
         ) { [weak self] result in
             switch result {
-            case .success(let suggestions):
-                self?.suggestions = SuggestionMapper.map(from: suggestions)
-                print("createAdvertisementProducts ✅")
+            case .success(let result):
+                self?.suggestions = SuggestionMapper.map(from: result)
+                
+                print("createRecommendationProducts ✅")
+                print("isBaseline : \(result.metadata?.isBaseline)")
+                self?.suggestions.forEach { suggestion in
+                    print(suggestion.option.adsetID)
+                }
                 
             case .failure(let error):
-                print("createAdvertisementProducts ❌ : \(error)")
+                print("createRecommendationProducts ❌ : \(error.localizedDescription)")
             }
         }
     }

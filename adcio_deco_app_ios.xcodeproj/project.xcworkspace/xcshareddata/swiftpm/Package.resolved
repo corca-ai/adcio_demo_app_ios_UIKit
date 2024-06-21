@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/corca-ai/adcio-ios-sdk",
       "state" : {
-        "branch" : "demo",
-        "revision" : "31c4fdf9fe174d5701c0e62e59901baeef74a243"
+        "branch" : "main",
+        "revision" : "e4fa53f38e2c0c1f020837915f0a10cdf13204b3"
       }
     }
   ],
