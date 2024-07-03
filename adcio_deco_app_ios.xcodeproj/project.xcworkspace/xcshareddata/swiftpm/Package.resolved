@@ -6,8 +6,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/corca-ai/adcio-ios-sdk",
       "state" : {
-        "branch" : "main",
-        "revision" : "e4fa53f38e2c0c1f020837915f0a10cdf13204b3"
+        "branch" : "test-open-api-generator",
+        "revision" : "e0723b91d56357f5f740caf7ad8f34409c92a950"
+      }
+    },
+    {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable",
+      "state" : {
+        "revision" : "862808b2070cd908cb04f9aafe7de83d35f81b05",
+        "version" : "0.6.7"
       }
     }
   ],

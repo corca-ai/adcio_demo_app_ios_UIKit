@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.createRecommendationProducts()
+        presenter?.createAdvertisementProducts()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -157,6 +157,6 @@ extension HomeViewController: HomePresenterView {
     }
     
     func createAdvertisementProducts() {
-        presenter?.createRecommendationProducts()
+        presenter?.createAdvertisementProducts()
     }
 }

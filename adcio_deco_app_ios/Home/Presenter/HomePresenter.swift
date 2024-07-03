@@ -9,6 +9,7 @@ import Foundation
 
 import AdcioAnalytics
 import AdcioPlacement
+import ControllerV1
 
 protocol HomePresenterView: AnyObject {
     func onClick(_ suggestion: SuggestionEntity)
@@ -45,13 +46,18 @@ final class HomePresenter {
         
         analyticsManager.onClick(option: option,
                                  customerID: nil,
-                                 productIDOnStore: suggestion.product.id) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("onClick ✅ \(isSuccess) ")
-            case .failure(let error):
-                print("onClick ❌ : \(error) ")
+                                 productIDOnStore: suggestion.product.id) { result, error in
+            guard error == nil else {
+                print("onClick ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("onClick ❌")
+                return
+            }
+            
+            print("onClick ✅")
         }
     }
     
@@ -66,113 +72,50 @@ final class HomePresenter {
         
         analyticsManager.onImpression(option: optionEntity,
                                       customerID: nil,
-                                      productIDOnStore: nil) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("onImpression ✅ \(isSuccess) ")
-            case .failure(let error):
-                print("onImpression ❌ : \(error) ")
+                                      productIDOnStore: nil) { result, error in
+            guard error == nil else {
+                print("onImpression ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("onImpression ❌")
+                return
+            }
+            
+            print("onImpression ✅")
         }
     }
     
     func createAdvertisementProducts() {
-        placementManager.createAdvertisementProducts(
-            clientID: clientID,
-            excludingProductIDs: nil,
-            categoryID: "2179",
-            placementID: "5ae9907f-3cc2-4ed4-aaa4-4b20ac97f9f4",
-            customerID: "corca0302",
+        placementManager.createAdvertisementProducts(ProductSuggestionRequestDto(
+            sessionId: placementManager.sessionID,
+            deviceId: placementManager.deviceID,
+            customerId: "corca0302",
+            placementId: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
+            placementPositionX: nil,
+            placementPositionY: nil,
             fromAgent: false,
             birthYear: 2000,
             gender: .male,
-            filters: [
-                "price_excluding_tax": Filter(not: 53636),
-                "product_code": Filter(contains: "KY"),
-                "province_id": Filter(equalTo: 1)
-            ]
-        ) { [weak self] result in
-            switch result {
-            case .success(let suggestions):
-                self?.suggestions = SuggestionMapper.map(from: suggestions)
-                print("createAdvertisementProducts ✅")
-                
-            case .failure(let error):
+            clientId: clientID,
+            excludingProductIds: nil,
+            categoryId: nil,
+            filters: nil)
+        ) { [weak self] result, error in
+            guard error == nil else {
                 print("createAdvertisementProducts ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("createAdvertisementProducts ❌")
+                return
+            }
+            
+            self?.suggestions = SuggestionMapper.map(from: result)
+            print("createAdvertisementProducts ✅")
         }
-    }
-    
-    func createRecommendationProducts() {
-        placementManager.createRecommendationProducts(
-            clientID: clientID,
-            excludingProductIDs: nil,
-            categoryID: nil,
-            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
-            customerID: "corca0302",
-            fromAgent: false,
-            birthYear: 2000,
-            gender: .male,
-            filters: nil
-        ) { [weak self] result in
-            switch result {
-            case .success(let result):
-                self?.suggestions = SuggestionMapper.map(from: result)
-                
-                print("createRecommendationProducts ✅")
-                print("isBaseline : \(result.metadata?.isBaseline)")
-                self?.suggestions.forEach { suggestion in
-                    print(suggestion.option.adsetID)
-                }
-                
-            case .failure(let error):
-                print("createRecommendationProducts ❌ : \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func createAdvertisementBanners() {
-        placementManager.createAdvertisementBanners(
-            clientID: clientID,
-            excludingProductIDs: ["1031"],
-            categoryID: "1",
-            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
-            customerID: "corca0302",
-            fromAgent: false,
-            birthYear: 2000,
-            gender: .male) { [weak self] result in
-                switch result {
-                case .success(let suggestions):
-                    // success do something
-                    print("createAdvertisementProducts ✅")
-                    
-                case .failure(let error):
-                    // failure do something
-                    print("createAdvertisementProducts ❌ : \(error)")
-                }
-            }
-    }
-    
-    func createRecommendationBanners() {
-        placementManager.createRecommendationBanners(
-            clientID: clientID,
-            excludingProductIDs: ["1031"],
-            categoryID: "1",
-            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
-            customerID: "corca0302",
-            fromAgent: false,
-            birthYear: 2000,
-            gender: .male) { [weak self] result in
-                switch result {
-                case .success(let suggestions):
-                    // success do something
-                    print("createAdvertisementProducts ✅")
-                    
-                case .failure(let error):
-                    // failure do something
-                    print("createAdvertisementProducts ❌ : \(error)")
-                }
-            }
     }
     
     private func impressable(with adSetID: AdSetID) -> Bool {

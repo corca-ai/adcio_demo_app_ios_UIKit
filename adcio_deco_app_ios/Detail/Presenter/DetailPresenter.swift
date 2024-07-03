@@ -52,14 +52,18 @@ final class DetailPresenter {
                                 productIDOnStore: suggestion.product.id,
                                 requestID: suggestion.option.requestID,
                                 adsetID: suggestion.option.adsetID,
-                                categoryIDOnStore: nil) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("\(path) onView \(isSuccess) ✅")
-                
-            case .failure(let error):
-                print("\(path) onView : \(error) ❌")
+                                categoryIDOnStore: nil) { result, error in
+            guard error == nil else {
+                print("onView ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("onView ❌")
+                return
+            }
+            
+            print("onView ✅")
         }
     }
     
@@ -70,13 +74,18 @@ final class DetailPresenter {
                                      reqeustID: suggestion.option.requestID,
                                      adsetID: suggestion.option.adsetID,
                                      categoryIdOnStore: nil,
-                                     quantity: nil) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("onAddToCart \(isSuccess) ✅")
-            case .failure(let error):
-                print("onAddToCart : \(error) ❌")
+                                     quantity: nil) { result, error in
+            guard error == nil else {
+                print("onAddToCart ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("onAddToCart ❌")
+                return
+            }
+            
+            print("onAddToCart ✅")
         }
     }
     
@@ -88,13 +97,18 @@ final class DetailPresenter {
                                     categoryIDOnStore: nil,
                                     quantity: nil,
                                     productIDOnStore: suggestion.product.id,
-                                    amount: suggestion.product.price) { result in
-            switch result {
-            case .success(let isSuccess):
-                print("onPurchase \(isSuccess) ✅")
-            case .failure(let error):
-                print("onPurchase : \(error) ❌")
+                                    amount: Double(suggestion.product.price)) { result, error in
+            guard error == nil else {
+                print("onPurchase ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("onPurchase ❌")
+                return
+            }
+            
+            print("onPurchase ✅")
         }
     }
 }

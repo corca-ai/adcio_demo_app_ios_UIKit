@@ -8,10 +8,10 @@
 import Foundation
 import AdcioPlacement
 import AdcioAnalytics
+import ControllerV1
 
 struct SuggestionMapper {
-    static func map(from: AdcioSuggestionRawData) -> [SuggestionEntity] {
-        let isBaseline = from.metadata?.isBaseline ?? false
+    static func map(from: ProductSuggestionResponseDto) -> [SuggestionEntity] {
         let products = from.suggestions.map { $0.product }
         let options = from.suggestions.map { $0.logOptions }
         
@@ -19,14 +19,14 @@ struct SuggestionMapper {
             let productEntity = ProductEntity(id: product.id,
                                               name: product.name,
                                               image: product.image,
-                                              price: product.price,
+                                              price: Int(product.price),
                                               seller: product.sellerId,
                                               isAd: true)
             
             let optionEntity = LogOptionEntity(requestID: option.requestId,
                                                adsetID: option.adsetId)
             
-            return SuggestionEntity(product: productEntity, option: optionEntity, isBaseline: isBaseline)
+            return SuggestionEntity(product: productEntity, option: optionEntity, isBaseline: false)
         }
         
         return suggestions

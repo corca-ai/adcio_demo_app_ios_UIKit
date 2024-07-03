@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6921F7112BD8A44200ED649E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6921F7102BD8A44200ED649E /* DetailViewController.swift */; };
 		6921F7132BD8A45D00ED649E /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6921F7122BD8A45D00ED649E /* DetailPresenter.swift */; };
+		697838572C3521F5009FC0F7 /* AdcioPlacement in Frameworks */ = {isa = PBXBuildFile; productRef = 697838562C3521F5009FC0F7 /* AdcioPlacement */; };
+		697838592C3521F5009FC0F7 /* AdcioSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 697838582C3521F5009FC0F7 /* AdcioSDK */; };
+		6978385B2C3521FB009FC0F7 /* AdcioAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6978385A2C3521FB009FC0F7 /* AdcioAnalytics */; };
 		6998BEFD2BD8F64E0066ABD7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6998BEFC2BD8F64E0066ABD7 /* ImageLoader.swift */; };
 		69C6C7B62C252AE100A91C28 /* BaselineEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C6C7B52C252AE100A91C28 /* BaselineEntity.swift */; };
 		69C8CF112C1C0C3200E4A899 /* ImpressionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C8CF102C1C0C3200E4A899 /* ImpressionManager.swift */; };
@@ -17,10 +20,6 @@
 		9BD26EAD2BD7F96700508AA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD26EAB2BD7F96700508AA6 /* Main.storyboard */; };
 		9BD26EAF2BD7F96800508AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD26EAE2BD7F96800508AA6 /* Assets.xcassets */; };
 		9BD26EB22BD7F96800508AA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD26EB02BD7F96800508AA6 /* LaunchScreen.storyboard */; };
-		9BD26EC02BD7FA0D00508AA6 /* AdcioAgent in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD26EBF2BD7FA0D00508AA6 /* AdcioAgent */; };
-		9BD26EC22BD7FA0D00508AA6 /* AdcioAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD26EC12BD7FA0D00508AA6 /* AdcioAnalytics */; };
-		9BD26EC42BD7FA0D00508AA6 /* AdcioPlacement in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD26EC32BD7FA0D00508AA6 /* AdcioPlacement */; };
-		9BD26EC62BD7FA0D00508AA6 /* AdcioSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD26EC52BD7FA0D00508AA6 /* AdcioSDK */; };
 		9BD26ECC2BD7FB6200508AA6 /* ProductEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD26ECB2BD7FB6200508AA6 /* ProductEntity.swift */; };
 		9BD26ECE2BD7FBCB00508AA6 /* LogOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD26ECD2BD7FBCB00508AA6 /* LogOptionEntity.swift */; };
 		9BD26ED02BD7FBDC00508AA6 /* SuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD26ECF2BD7FBDC00508AA6 /* SuggestionEntity.swift */; };
@@ -59,10 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD26EC22BD7FA0D00508AA6 /* AdcioAnalytics in Frameworks */,
-				9BD26EC02BD7FA0D00508AA6 /* AdcioAgent in Frameworks */,
-				9BD26EC62BD7FA0D00508AA6 /* AdcioSDK in Frameworks */,
-				9BD26EC42BD7FA0D00508AA6 /* AdcioPlacement in Frameworks */,
+				6978385B2C3521FB009FC0F7 /* AdcioAnalytics in Frameworks */,
+				697838592C3521F5009FC0F7 /* AdcioSDK in Frameworks */,
+				697838572C3521F5009FC0F7 /* AdcioPlacement in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,11 +100,19 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		697838552C3521F4009FC0F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9BD26E992BD7F96700508AA6 = {
 			isa = PBXGroup;
 			children = (
 				9BD26EA42BD7F96700508AA6 /* adcio_deco_app_ios */,
 				9BD26EA32BD7F96700508AA6 /* Products */,
+				697838552C3521F4009FC0F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,10 +214,9 @@
 			);
 			name = adcio_deco_app_ios;
 			packageProductDependencies = (
-				9BD26EBF2BD7FA0D00508AA6 /* AdcioAgent */,
-				9BD26EC12BD7FA0D00508AA6 /* AdcioAnalytics */,
-				9BD26EC32BD7FA0D00508AA6 /* AdcioPlacement */,
-				9BD26EC52BD7FA0D00508AA6 /* AdcioSDK */,
+				697838562C3521F5009FC0F7 /* AdcioPlacement */,
+				697838582C3521F5009FC0F7 /* AdcioSDK */,
+				6978385A2C3521FB009FC0F7 /* AdcioAnalytics */,
 			);
 			productName = adcio_deco_app_ios;
 			productReference = 9BD26EA22BD7F96700508AA6 /* adcio_deco_app_ios.app */;
@@ -242,7 +247,7 @@
 			);
 			mainGroup = 9BD26E992BD7F96700508AA6;
 			packageReferences = (
-				9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */,
+				697838542C3521E3009FC0F7 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */,
 			);
 			productRefGroup = 9BD26EA32BD7F96700508AA6 /* Products */;
 			projectDirPath = "";
@@ -518,36 +523,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */ = {
+		697838542C3521E3009FC0F7 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/corca-ai/adcio-ios-sdk";
 			requirement = {
-				branch = main;
+				branch = "test-open-api-generator";
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9BD26EBF2BD7FA0D00508AA6 /* AdcioAgent */ = {
+		697838562C3521F5009FC0F7 /* AdcioPlacement */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
-			productName = AdcioAgent;
-		};
-		9BD26EC12BD7FA0D00508AA6 /* AdcioAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
-			productName = AdcioAnalytics;
-		};
-		9BD26EC32BD7FA0D00508AA6 /* AdcioPlacement */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
+			package = 697838542C3521E3009FC0F7 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
 			productName = AdcioPlacement;
 		};
-		9BD26EC52BD7FA0D00508AA6 /* AdcioSDK */ = {
+		697838582C3521F5009FC0F7 /* AdcioSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9BD26EBE2BD7FA0D00508AA6 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
+			package = 697838542C3521E3009FC0F7 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
 			productName = AdcioSDK;
+		};
+		6978385A2C3521FB009FC0F7 /* AdcioAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 697838542C3521E3009FC0F7 /* XCRemoteSwiftPackageReference "adcio-ios-sdk" */;
+			productName = AdcioAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
