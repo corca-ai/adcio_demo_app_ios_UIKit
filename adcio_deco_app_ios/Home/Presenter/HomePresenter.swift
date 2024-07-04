@@ -87,34 +87,121 @@ final class HomePresenter {
         }
     }
     
+    /// create Advertisement Products method
     func createAdvertisementProducts() {
-        placementManager.createAdvertisementProducts(ProductSuggestionRequestDto(
-            sessionId: placementManager.sessionID,
-            deviceId: placementManager.deviceID,
-            customerId: "corca0302",
-            placementId: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
-            placementPositionX: nil,
-            placementPositionY: nil,
+        placementManager.createAdvertisementProducts(
+            clientID: clientID,
+            excludingProductIDs: nil,
+            categoryID: nil,
+            placementID: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
+            customerID: nil,
             fromAgent: false,
             birthYear: 2000,
             gender: .male,
-            clientId: clientID,
-            excludingProductIds: nil,
-            categoryId: nil,
-            filters: nil)
-        ) { [weak self] result, error in
+            filters: [
+                [
+                    "price_excluding_tax": ProductFilterOperationDto(not: 53636),
+                    "product_code": ProductFilterOperationDto(contains: "KY")
+                ]
+            ]) { [weak self] result, error in
+                guard error == nil else {
+                    print("createAdvertisementProducts ❌ : \(error)")
+                    return
+                }
+                
+                guard let result else {
+                    print("products is nil ❌")
+                    return
+                }
+                
+                self?.suggestions = SuggestionMapper.map(from: result)
+                print("createAdvertisementProducts ✅")
+            }
+    }
+    
+    /// create Advertisement Banners method
+    func createAdvertisementBanners() {
+        placementManager.createAdvertisementBanners(
+            clientID: clientID,
+            excludingProductIDs: nil,
+            categoryID: nil,
+            placementID: "placementID",
+            customerID: "customerID",
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male) 
+        { [weak self] result, error in
             guard error == nil else {
-                print("createAdvertisementProducts ❌ : \(error)")
+                print("createAdvertisementBanners ❌ : \(error)")
                 return
             }
             
             guard let result else {
-                print("createAdvertisementProducts ❌")
+                print("banner is nil ❌")
                 return
             }
             
-            self?.suggestions = SuggestionMapper.map(from: result)
-            print("createAdvertisementProducts ✅")
+            //success
+            print("createAdvertisementBanners ✅")
+        }
+    }
+    
+    /// create Recommendation Products method
+    func createRecommendationProducts() {
+        placementManager.createRecommendationProducts(
+            clientID: clientID,
+            excludingProductIDs: nil,
+            categoryID: nil,
+            placementID: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
+            customerID: nil,
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male,
+            filters: [
+                [
+                    "price_excluding_tax": ProductFilterOperationDto(not: 53636),
+                    "product_code": ProductFilterOperationDto(contains: "KY")
+                ]
+            ]) { [weak self] result, error in
+                guard error == nil else {
+                    print("createRecommendationProducts ❌ : \(error)")
+                    return
+                }
+                
+                guard let result else {
+                    print("products is nil ❌")
+                    return
+                }
+                
+                self?.suggestions = SuggestionMapper.map(from: result)
+                print("createRecommendationProducts ✅")
+            }
+    }
+    
+    /// create Recommendation Bannders method
+    func createRecommendationBanners() {
+        placementManager.createRecommendationBanners(
+            clientID: clientID,
+            excludingProductIDs: nil,
+            categoryID: nil,
+            placementID: "placementID",
+            customerID: "customerID",
+            fromAgent: false,
+            birthYear: 2000,
+            gender: .male)
+        { [weak self] result, error in
+            guard error == nil else {
+                print("createRecommendationBanners ❌ : \(error)")
+                return
+            }
+            
+            guard let result else {
+                print("banner is nil ❌")
+                return
+            }
+            
+            //success
+            print("createRecommendationBanners ✅")
         }
     }
     
