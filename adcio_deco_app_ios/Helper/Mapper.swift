@@ -19,14 +19,14 @@ struct SuggestionMapper {
             let productEntity = ProductEntity(id: product.id,
                                               name: product.name,
                                               image: product.image,
-                                              price: Int(product.price),
+                                              price: product.price,
                                               seller: product.sellerId,
                                               isAd: true)
             
             let optionEntity = LogOptionEntity(requestID: option.requestId,
                                                adsetID: option.adsetId)
             
-            return SuggestionEntity(product: productEntity, option: optionEntity, isBaseline: false)
+            return SuggestionEntity(product: productEntity, option: optionEntity)
         }
         
         return suggestions

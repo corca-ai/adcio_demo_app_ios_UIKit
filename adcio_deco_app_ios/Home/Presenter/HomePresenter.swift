@@ -14,7 +14,7 @@ import ControllerV1
 protocol HomePresenterView: AnyObject {
     func onClick(_ suggestion: SuggestionEntity)
     func onImpression(with option: LogOptionEntity)
-    func createAdvertisementProducts()
+    func createAdvertisementProducts(userAgent: String?)
 }
 
 final class HomePresenter {
@@ -46,7 +46,8 @@ final class HomePresenter {
         
         analyticsManager.onClick(option: option,
                                  customerID: nil,
-                                 productIDOnStore: suggestion.product.id) { result, error in
+                                 productIDOnStore: suggestion.product.id, 
+                                 userAgent: nil) { result, error in
             guard error == nil else {
                 print("onClick ❌ : \(error)")
                 return
@@ -72,7 +73,8 @@ final class HomePresenter {
         
         analyticsManager.onImpression(option: optionEntity,
                                       customerID: nil,
-                                      productIDOnStore: nil) { result, error in
+                                      productIDOnStore: nil, 
+                                      userAgent: nil) { result, error in
             guard error == nil else {
                 print("onImpression ❌ : \(error)")
                 return
@@ -88,35 +90,35 @@ final class HomePresenter {
     }
     
     /// create Advertisement Products method
-    func createAdvertisementProducts() {
+    func createAdvertisementProducts(userAgent: String? = nil) {
         placementManager.createAdvertisementProducts(
             clientID: clientID,
             excludingProductIDs: nil,
             categoryID: nil,
-            placementID: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
+            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
             customerID: nil,
             fromAgent: false,
             birthYear: 2000,
-            gender: .male,
-            filters: [
-                [
-                    "price_excluding_tax": ProductFilterOperationDto(not: 53636),
-                    "product_code": ProductFilterOperationDto(contains: "KY")
-                ]
-            ]) { [weak self] result, error in
-                guard error == nil else {
-                    print("createAdvertisementProducts ❌ : \(error)")
-                    return
-                }
-                
-                guard let result else {
-                    print("products is nil ❌")
-                    return
-                }
-                
-                self?.suggestions = SuggestionMapper.map(from: result)
-                print("createAdvertisementProducts ✅")
+            baselineProductIDs: nil,
+            filters: nil,
+            targets: [
+                SuggestionRequestTarget(keyName: "", values: [])
+            ],
+            userAgent: userAgent)
+        { [weak self] result, error in
+            guard error == nil else {
+                print("createAdvertisementProducts ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("products is nil ❌")
+                return
+            }
+            
+            self?.suggestions = SuggestionMapper.map(from: result)
+            print("createAdvertisementProducts ✅")
+        }
     }
     
     /// create Advertisement Banners method
@@ -129,7 +131,8 @@ final class HomePresenter {
             customerID: "customerID",
             fromAgent: false,
             birthYear: 2000,
-            gender: .male) 
+            targets: [], 
+            userAgent: nil)
         { [weak self] result, error in
             guard error == nil else {
                 print("createAdvertisementBanners ❌ : \(error)")
@@ -147,7 +150,7 @@ final class HomePresenter {
     }
     
     /// create Recommendation Products method
-    func createRecommendationProducts() {
+    func createRecommendationProducts(userAgent: String? = nil) {
         placementManager.createRecommendationProducts(
             clientID: clientID,
             excludingProductIDs: nil,
@@ -156,26 +159,31 @@ final class HomePresenter {
             customerID: nil,
             fromAgent: false,
             birthYear: 2000,
-            gender: .male,
+            baselineProductIDs: nil,
             filters: [
                 [
                     "price_excluding_tax": ProductFilterOperationDto(not: 53636),
                     "product_code": ProductFilterOperationDto(contains: "KY")
                 ]
-            ]) { [weak self] result, error in
-                guard error == nil else {
-                    print("createRecommendationProducts ❌ : \(error)")
-                    return
-                }
-                
-                guard let result else {
-                    print("products is nil ❌")
-                    return
-                }
-                
-                self?.suggestions = SuggestionMapper.map(from: result)
-                print("createRecommendationProducts ✅")
+            ],
+            targets: [
+                SuggestionRequestTarget(keyName: "", values: [])
+            ],
+            userAgent: nil)
+        { [weak self] result, error in
+            guard error == nil else {
+                print("createRecommendationProducts ❌ : \(error)")
+                return
             }
+            
+            guard let result else {
+                print("products is nil ❌")
+                return
+            }
+            
+            self?.suggestions = SuggestionMapper.map(from: result)
+            print("createRecommendationProducts ✅")
+        }
     }
     
     /// create Recommendation Bannders method
@@ -188,7 +196,8 @@ final class HomePresenter {
             customerID: "customerID",
             fromAgent: false,
             birthYear: 2000,
-            gender: .male)
+            targets: [],
+            userAgent: nil)
         { [weak self] result, error in
             guard error == nil else {
                 print("createRecommendationBanners ❌ : \(error)")

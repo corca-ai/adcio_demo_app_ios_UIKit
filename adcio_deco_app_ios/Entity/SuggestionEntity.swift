@@ -10,5 +10,4 @@ import Foundation
 struct SuggestionEntity: Hashable {
     let product: ProductEntity
     let option: LogOptionEntity
-    let isBaseline: Bool
 }

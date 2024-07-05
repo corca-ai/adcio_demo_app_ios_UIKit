@@ -39,7 +39,7 @@ final class DetailPresenter {
         return suggestion.product.name
     }
     
-    func price() -> Int {
+    func price() -> Double {
         return suggestion.product.price
     }
     
@@ -52,7 +52,8 @@ final class DetailPresenter {
                                 productIDOnStore: suggestion.product.id,
                                 requestID: suggestion.option.requestID,
                                 adsetID: suggestion.option.adsetID,
-                                categoryIDOnStore: nil) { result, error in
+                                categoryIDOnStore: nil, 
+                                userAgent: nil) { result, error in
             guard error == nil else {
                 print("onView ❌ : \(error)")
                 return
@@ -71,10 +72,11 @@ final class DetailPresenter {
         analyticsManager.onAddToCart(cartID: nil,
                                      customerID: nil,
                                      productIDOnStore: suggestion.product.id,
-                                     reqeustID: suggestion.option.requestID,
+                                     requestID: suggestion.option.requestID,
                                      adsetID: suggestion.option.adsetID,
                                      categoryIdOnStore: nil,
-                                     quantity: nil) { result, error in
+                                     quantity: nil, 
+                                     userAgent: nil) { result, error in
             guard error == nil else {
                 print("onAddToCart ❌ : \(error)")
                 return
@@ -97,7 +99,8 @@ final class DetailPresenter {
                                     categoryIDOnStore: nil,
                                     quantity: nil,
                                     productIDOnStore: suggestion.product.id,
-                                    amount: Double(suggestion.product.price)) { result, error in
+                                    amount: suggestion.product.price,
+                                    userAgent: nil) { result, error in
             guard error == nil else {
                 print("onPurchase ❌ : \(error)")
                 return

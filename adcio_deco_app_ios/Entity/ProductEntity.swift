@@ -11,7 +11,7 @@ struct ProductEntity: Codable, Hashable {
     let id: String
     let name: String
     let image: String
-    let price: Int
+    let price: Double
     let seller: String
     let isAd: Bool
     

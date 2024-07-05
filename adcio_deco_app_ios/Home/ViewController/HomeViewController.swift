@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     private var presenter: HomePresenter?
     private var visibleCellsWorkItems: [IndexPath: DispatchWorkItem] = [:]
     private let impressionThreshold: TimeInterval = 1.0
+    private let userAgent: String = "\(UIDevice.current.systemName)\(UIDevice.current.systemVersion)"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.createAdvertisementProducts()
+        presenter?.createAdvertisementProducts(userAgent: userAgent)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,7 +157,7 @@ extension HomeViewController: HomePresenterView {
         presenter?.onClick(suggestion)
     }
     
-    func createAdvertisementProducts() {
-        presenter?.createAdvertisementProducts()
+    func createAdvertisementProducts(userAgent: String?) {
+        presenter?.createRecommendationProducts(userAgent: userAgent)
     }
 }
