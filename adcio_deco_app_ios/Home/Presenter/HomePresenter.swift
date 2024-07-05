@@ -98,7 +98,6 @@ final class HomePresenter {
             placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
             customerID: nil,
             fromAgent: false,
-            birthYear: 2000,
             baselineProductIDs: nil,
             filters: nil,
             targets: [
@@ -130,7 +129,6 @@ final class HomePresenter {
             placementID: "placementID",
             customerID: "customerID",
             fromAgent: false,
-            birthYear: 2000,
             targets: [], 
             userAgent: nil)
         { [weak self] result, error in
@@ -158,7 +156,6 @@ final class HomePresenter {
             placementID: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
             customerID: nil,
             fromAgent: false,
-            birthYear: 2000,
             baselineProductIDs: nil,
             filters: [
                 [
@@ -195,7 +192,6 @@ final class HomePresenter {
             placementID: "placementID",
             customerID: "customerID",
             fromAgent: false,
-            birthYear: 2000,
             targets: [],
             userAgent: nil)
         { [weak self] result, error in
