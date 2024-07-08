@@ -181,11 +181,6 @@ final class HomePresenter {
             self?.suggestions.append(contentsOf: suggestions.map { $0 })
             self?.excludingProductIDs.append(contentsOf: self?.suggestions.compactMap { $0.product.idOnStore } ?? [])
             print("createRecommendationProducts ✅")
-            suggestions.forEach { entity in
-                print("isBaseline", entity.isBaseline)
-                print("requestID : \(entity.option.requestID)")
-                print("idOnStore : \(entity.product.idOnStore)")
-            }
         }
     }
     
