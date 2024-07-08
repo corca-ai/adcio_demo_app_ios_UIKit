@@ -15,10 +15,13 @@ protocol HomePresenterView: AnyObject {
     func onClick(_ suggestion: SuggestionEntity)
     func onImpression(with option: LogOptionEntity)
     func createAdvertisementProducts(userAgent: String?)
+    func createRecommendationProducts(userAgent: String?)
+    func createAdvertisementBanners()
+    func createRecommendationBanners()
 }
 
 final class HomePresenter {
-    private let clientID: String = "542b343f-f103-44ff-93a2-174722e0b5f7"
+    private let clientID: String = "7bbb703e-a30b-4a4a-91b4-c0a7d2303415"
     private var analyticsManager: AnalyticsViewManageable
     private var placementManager: PlacementManageable
     //Impression should only run once after the screen is launched.  This logic prevents Impression from being called multiple times.
@@ -28,6 +31,9 @@ final class HomePresenter {
             self.reloadCollectionView?()
         }
     }
+    private var excludingProductIDs: [String] = ["458007", "1211423", "1165080", "182602"]
+    private var baselineProductIDs = [String]()
+    
     
     weak var view: HomePresenterView?
     var reloadCollectionView: (() -> Void)?
@@ -46,7 +52,7 @@ final class HomePresenter {
         
         analyticsManager.onClick(option: option,
                                  customerID: nil,
-                                 productIDOnStore: suggestion.product.id, 
+                                 productIDOnStore: suggestion.product.id,
                                  userAgent: nil) { result, error in
             guard error == nil else {
                 print("onClick ❌ : \(error)")
@@ -73,7 +79,7 @@ final class HomePresenter {
         
         analyticsManager.onImpression(option: optionEntity,
                                       customerID: nil,
-                                      productIDOnStore: nil, 
+                                      productIDOnStore: nil,
                                       userAgent: nil) { result, error in
             guard error == nil else {
                 print("onImpression ❌ : \(error)")
@@ -93,16 +99,14 @@ final class HomePresenter {
     func createAdvertisementProducts(userAgent: String? = nil) {
         placementManager.createAdvertisementProducts(
             clientID: clientID,
-            excludingProductIDs: nil,
+            excludingProductIDs: excludingProductIDs,
             categoryID: nil,
-            placementID: "67592c00-a230-4c31-902e-82ae4fe71866",
+            placementID: "e4e14a3c-d99f-4646-b31e-bbe144e65dff",
             customerID: nil,
             fromAgent: false,
-            baselineProductIDs: nil,
+            baselineProductIDs: baselineProductIDs,
             filters: nil,
-            targets: [
-                SuggestionRequestTarget(keyName: "", values: [])
-            ],
+            targets: nil,
             userAgent: userAgent)
         { [weak self] result, error in
             guard error == nil else {
@@ -115,7 +119,9 @@ final class HomePresenter {
                 return
             }
             
-            self?.suggestions = SuggestionMapper.map(from: result)
+            let suggestions = SuggestionMapper.map(from: result)
+            self?.suggestions.append(contentsOf: suggestions.map { $0 })
+            self?.excludingProductIDs.append(contentsOf: self?.suggestions.compactMap { $0.product.idOnStore } ?? [])
             print("createAdvertisementProducts ✅")
         }
     }
@@ -129,7 +135,7 @@ final class HomePresenter {
             placementID: "placementID",
             customerID: "customerID",
             fromAgent: false,
-            targets: [], 
+            targets: [],
             userAgent: nil)
         { [weak self] result, error in
             guard error == nil else {
@@ -151,21 +157,14 @@ final class HomePresenter {
     func createRecommendationProducts(userAgent: String? = nil) {
         placementManager.createRecommendationProducts(
             clientID: clientID,
-            excludingProductIDs: nil,
+            excludingProductIDs: excludingProductIDs,
             categoryID: nil,
-            placementID: "01019bab-ab09-4d0b-af9c-18b0e52d472c",
+            placementID: "e97f9b4b-91ac-4835-a1f7-3098b9868f69",
             customerID: nil,
             fromAgent: false,
-            baselineProductIDs: nil,
-            filters: [
-                [
-                    "price_excluding_tax": ProductFilterOperationDto(not: 53636),
-                    "product_code": ProductFilterOperationDto(contains: "KY")
-                ]
-            ],
-            targets: [
-                SuggestionRequestTarget(keyName: "", values: [])
-            ],
+            baselineProductIDs: baselineProductIDs,
+            filters: nil,
+            targets: nil,
             userAgent: nil)
         { [weak self] result, error in
             guard error == nil else {
@@ -178,8 +177,15 @@ final class HomePresenter {
                 return
             }
             
-            self?.suggestions = SuggestionMapper.map(from: result)
+            let suggestions = SuggestionMapper.map(from: result)
+            self?.suggestions.append(contentsOf: suggestions.map { $0 })
+            self?.excludingProductIDs.append(contentsOf: self?.suggestions.compactMap { $0.product.idOnStore } ?? [])
             print("createRecommendationProducts ✅")
+            suggestions.forEach { entity in
+                print("isBaseline", entity.isBaseline)
+                print("requestID : \(entity.option.requestID)")
+                print("idOnStore : \(entity.product.idOnStore)")
+            }
         }
     }
     

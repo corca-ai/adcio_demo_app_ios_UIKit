@@ -12,11 +12,13 @@ import ControllerV1
 
 struct SuggestionMapper {
     static func map(from: ProductSuggestionResponseDto) -> [SuggestionEntity] {
+        let isBaseline = from.metadata.isBaseline
         let products = from.suggestions.map { $0.product }
         let options = from.suggestions.map { $0.logOptions }
         
         let suggestions = zip(products, options).map { product, option in
-            let productEntity = ProductEntity(id: product.id,
+            let productEntity = ProductEntity(id: product.id, 
+                                              idOnStore: product.idOnStore,
                                               name: product.name,
                                               image: product.image,
                                               price: product.price,
@@ -26,7 +28,7 @@ struct SuggestionMapper {
             let optionEntity = LogOptionEntity(requestID: option.requestId,
                                                adsetID: option.adsetId)
             
-            return SuggestionEntity(product: productEntity, option: optionEntity)
+            return SuggestionEntity(product: productEntity, option: optionEntity, isBaseline: isBaseline)
         }
         
         return suggestions

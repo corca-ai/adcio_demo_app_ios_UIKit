@@ -9,6 +9,7 @@ import Foundation
 
 struct ProductEntity: Codable, Hashable {
     let id: String
+    let idOnStore: String
     let name: String
     let image: String
     let price: Double
@@ -17,6 +18,7 @@ struct ProductEntity: Codable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case id = "ID"
+        case idOnStore
         case name = "Name (KO)"
         case image = "Image URL"
         case price = "Customer Price"

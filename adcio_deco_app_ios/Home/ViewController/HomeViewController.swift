@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     private var visibleCellsWorkItems: [IndexPath: DispatchWorkItem] = [:]
     private let impressionThreshold: TimeInterval = 1.0
     private let userAgent: String = "\(UIDevice.current.systemName)\(UIDevice.current.systemVersion)"
+    private var isLoadingMoreData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +28,14 @@ class HomeViewController: UIViewController {
         presenter?.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+                self?.isLoadingMoreData = false
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.createAdvertisementProducts(userAgent: userAgent)
+        createRecommendationProducts(userAgent: userAgent)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +49,7 @@ class HomeViewController: UIViewController {
         collectionView.register(nibName, forCellWithReuseIdentifier: PlacementCell.cellReuseIdentifier)
     }
     
-    //MARK: - Code that detects that a product as a suggestion is on the screen 50% of the time for more than 1 second
+    // MARK: - Code to detect if a product is more than 50% visible on screen and visible for more than 1 second
     private func checkVisibleCells() {
         for cell in collectionView.visibleCells {
             if let indexPath = collectionView.indexPath(for: cell) {
@@ -79,7 +81,6 @@ class HomeViewController: UIViewController {
     }
     
     private func scheduleImpression(for indexPath: IndexPath, logOption: LogOptionEntity) {
-        // If there's already a scheduled work item, do nothing
         if visibleCellsWorkItems[indexPath] != nil { return }
         
         let workItem = DispatchWorkItem { [weak self] in
@@ -102,6 +103,12 @@ class HomeViewController: UIViewController {
             workItem.cancel()
         }
         visibleCellsWorkItems.removeAll()
+    }
+    
+    private func loadMoreData() {
+        guard !isLoadingMoreData else { return }
+        isLoadingMoreData = true
+        createRecommendationProducts(userAgent: userAgent)
     }
 }
 
@@ -139,6 +146,19 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         checkVisibleCells()
+        if let presenter = presenter {
+            let contentHeight = scrollView.contentSize.height
+            let offsetY = scrollView.contentOffset.y
+            let scrollViewHeight = scrollView.frame.size.height
+            
+            if offsetY > contentHeight - scrollViewHeight * 2 {
+                let visibleCells = collectionView.visibleCells
+                let indexPaths = visibleCells.compactMap { collectionView.indexPath(for: $0) }
+                if indexPaths.contains(where: { $0.item == presenter.suggestions.count - 2 }) {
+                    loadMoreData()
+                }
+            }
+        }
     }
 }
 
@@ -158,6 +178,18 @@ extension HomeViewController: HomePresenterView {
     }
     
     func createAdvertisementProducts(userAgent: String?) {
+        presenter?.createAdvertisementProducts(userAgent: userAgent)
+    }
+    
+    func createRecommendationProducts(userAgent: String?) {
         presenter?.createRecommendationProducts(userAgent: userAgent)
+    }
+    
+    func createAdvertisementBanners() {
+        presenter?.createAdvertisementBanners()
+    }
+    
+    func createRecommendationBanners() {
+        presenter?.createRecommendationBanners()
     }
 }

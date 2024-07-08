@@ -23,7 +23,7 @@ class PlacementCell: UICollectionViewCell {
     
     func configure(_ suggestion: SuggestionEntity) {
         nameLabel.text = suggestion.product.name
-        priceLabel.text = "\(suggestion.product.price)₩"
+        priceLabel.text = "\(suggestion.product.price)D"
         sellerLabel.text = suggestion.product.seller
         
         guard let url = URL(string: suggestion.product.image) else { return }

@@ -62,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="683-ev-KLA">
-                                <rect key="frame" x="24" y="448" width="345" height="321"/>
+                                <rect key="frame" x="28" y="448" width="337" height="321"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="40" minimumInteritemSpacing="16" id="bEa-sB-hEf">
                                     <size key="itemSize" width="180" height="220"/>
@@ -94,12 +94,12 @@
                             <constraint firstItem="GR9-5j-9Eq" firstAttribute="bottom" secondItem="683-ev-KLA" secondAttribute="bottom" id="DnP-Rc-ebn"/>
                             <constraint firstItem="683-ev-KLA" firstAttribute="top" secondItem="ePb-Hb-yn4" secondAttribute="bottom" constant="16" id="G7V-x7-8nU"/>
                             <constraint firstItem="rUX-bb-gqc" firstAttribute="trailing" secondItem="GR9-5j-9Eq" secondAttribute="trailing" id="Mse-kg-9Ml"/>
-                            <constraint firstAttribute="trailing" secondItem="683-ev-KLA" secondAttribute="trailing" constant="24" id="NCH-ja-Mvy"/>
+                            <constraint firstAttribute="trailing" secondItem="683-ev-KLA" secondAttribute="trailing" constant="28" id="NCH-ja-Mvy"/>
                             <constraint firstItem="mwb-xM-fT6" firstAttribute="centerY" secondItem="Vn8-OG-a8F" secondAttribute="centerY" id="PVc-Iy-436"/>
                             <constraint firstItem="Vn8-OG-a8F" firstAttribute="leading" secondItem="GR9-5j-9Eq" secondAttribute="leading" constant="16" id="Tqj-B6-KfO"/>
                             <constraint firstItem="ePb-Hb-yn4" firstAttribute="top" secondItem="rUX-bb-gqc" secondAttribute="bottom" constant="16" id="WuT-bc-9Tu"/>
                             <constraint firstItem="ePb-Hb-yn4" firstAttribute="leading" secondItem="GR9-5j-9Eq" secondAttribute="leading" constant="16" id="c85-o1-fLn"/>
-                            <constraint firstItem="683-ev-KLA" firstAttribute="leading" secondItem="GR9-5j-9Eq" secondAttribute="leading" constant="24" id="hqS-SI-KbT"/>
+                            <constraint firstItem="683-ev-KLA" firstAttribute="leading" secondItem="GR9-5j-9Eq" secondAttribute="leading" constant="28" id="hqS-SI-KbT"/>
                             <constraint firstItem="Vn8-OG-a8F" firstAttribute="top" secondItem="GR9-5j-9Eq" secondAttribute="top" constant="16" id="lcW-Lf-jhr"/>
                             <constraint firstItem="GR9-5j-9Eq" firstAttribute="trailing" secondItem="mwb-xM-fT6" secondAttribute="trailing" constant="16" id="zfG-gr-o4J"/>
                         </constraints>
