@@ -163,8 +163,14 @@ final class HomePresenter {
             customerID: nil,
             fromAgent: false,
             baselineProductIDs: baselineProductIDs,
-            filters: nil,
-            targets: nil,
+            filters: [
+                [
+                    "province_id" : ProductFilterOperationDto(equalTo: 1)
+                ]
+            ],
+            targets: [
+                SuggestionRequestTarget(keyName: "genter", values: ["male"])
+            ],
             userAgent: nil)
         { [weak self] result, error in
             guard error == nil else {
